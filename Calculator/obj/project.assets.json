@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Calculator\\Calculator.csproj",
+      "projectUniqueName": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repository\\Calculator\\Calculator.csproj",
       "projectName": "Calculator",
-      "projectPath": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Calculator\\Calculator.csproj",
+      "projectPath": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repository\\Calculator\\Calculator.csproj",
       "packagesPath": "C:\\Users\\Mariano\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Calculator\\obj\\",
+      "outputPath": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repository\\Calculator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Mariano\\AppData\\Roaming\\NuGet\\NuGet.Config",
