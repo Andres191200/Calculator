@@ -38,6 +38,9 @@ namespace Calculator
             result_box.FontWeight = FontWeights.SemiBold;
             result_box.TextAlignment = TextAlignment.Right;
             result_box.SetValue(Grid.ColumnSpanProperty, 4);
+
+            result_box.Text = 0.ToString();
+
             calculator_grid.Children.Add(result_box);
         }
 
@@ -55,7 +58,6 @@ namespace Calculator
             numbers_operators.Add(0);
             if (this.FirstNumberIs0())
             {
-                numbers_operators[0] = 0;
                 result_box.Text = 0.ToString();
                 numbers_operators.Remove(numbers_operators.First());
             }
@@ -71,10 +73,13 @@ namespace Calculator
             numbers_operators.Add(1);
             if (this.FirstNumberIs0())
             {
-                numbers_operators.Remove(numbers_operators.First());
-                result_box.Text=1.ToString();              
+                
+                result_box.Text = 1.ToString();
             }
-            else result_box.Text += 1.ToString();
+            else
+            {
+                result_box.Text += 1.ToString();
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
