@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
         Title="MainWindow" Height="525" Width="350">
-    <Grid>
+    <Grid x:Name="calculator_grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="115"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
@@ -44,17 +44,15 @@
             <TextBlock VerticalAlignment="Center" FontSize="60">+</TextBlock>
         </Button>
 
-        <Button Grid.Row="1" Grid.Column="2" FontSize="50" Background="LightBlue">
+        <Button Grid.Row="1" Grid.Column="2" FontSize="50" Background="LightBlue" Click="Substract_Button_Click">
             <TextBlock VerticalAlignment="Center" Width="25" Height="76">-</TextBlock>
         </Button>
 
         <Button Grid.Row="1" Grid.Column="3" FontSize="50" Background="LightBlue" Click="Multiply_Button_Click">x</Button>
 
-        <Button Grid.Row="4" Grid.Column="3" FontSize="50" Background="LightBlue" Click="Substract_Button_Click" Name="GetResultBtn">=</Button>
+        <Button Grid.Row="4" Grid.Column="3" FontSize="50" Background="LightBlue" Click="GetResult_Button_Click" Name="GetResultBtn">=</Button>
         
-        <Button Grid.Row="3" Grid.Column="3" Background="SlateGray" FontSize="40" Foreground="White">DEL</Button>
-        
-        <!-- ......................... SHOWING RESULTS BOX ....................... -->
-        <TextBox Grid.ColumnSpan="4" FontSize="50" Background="SlateGray" Foreground="white" VerticalContentAlignment="center" FontWeight="SemiBold" TextAlignment="Right" Text="{Binding ElementName=GetResultBtn, }"></TextBox>
+        <Button Grid.Row="3" Grid.Column="3" Background="SlateGray" FontSize="40" Foreground="White" Click="Del_Button_Click">DEL</Button>
+
     </Grid>
 </Window>
