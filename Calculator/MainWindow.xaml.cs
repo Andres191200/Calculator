@@ -236,6 +236,29 @@ namespace Calculator
             result_box.Text = 0.ToString();
         }
 
+        private void Square_Number_Button(object sender, RoutedEventArgs e)
+        {
+            result_box.Text += "²";
+            numbers_operators.Add(95);
+        }
+
+        private void Cube_Number_Button(object sender, RoutedEventArgs e)
+        {
+            result_box.Text += "³";
+            numbers_operators.Add(94);
+        }
+
+        private void Mod_Number_Button(object sender, RoutedEventArgs e)
+        {
+            result_box.Text = "MOD";
+            numbers_operators.Add(93);
+        }
+
+        private void RemoveLast_Button(object sender, RoutedEventArgs e)
+        {
+            numbers_operators.Remove(numbers_operators.Last());
+        }
+
         public void CalculateOperations()
         {
             int delta_x = 0, delta_y = 0;
@@ -250,19 +273,16 @@ namespace Calculator
                 {
                     delta_x++;
                 }
-                if (number >= 96 && number <= 99) //96=DIVIDE OPERATOR 98=MULTIPLY OPERATOR
+                if (number >= 93 && number <= 99) //96=DIVIDE OPERATOR 98=MULTIPLY OPERATOR
                 {                            //97=ADD OPERATOR    99=SUBSTRACT OPERATOR
                     delta_y++;
                     index = delta_x; //index of "%"
                     delta_x++;
-                    if (number == 96)
+                    for (int i = 0; i < index; i++)
                     {
-                        for (int i = 0; i < index; i++)
-                        {
-                            aux += numbers_operators[i].ToString();     //GET FIRST NUMBER
-                            first_number = Convert.ToDouble(aux);
-                        }
-                    }                    
+                        aux += numbers_operators[i].ToString();     //GET FIRST NUMBER
+                        first_number = Convert.ToDouble(aux);
+                    }                  
                     
                     aux = "";  //CLEANING AUX VARIABLE FOR THE SECOND NUMBER...              
                     for (j = Convert.ToInt32(index+1); j < numbers_operators.Count(); j++)   //GET SECOND NUMBER
@@ -271,14 +291,55 @@ namespace Calculator
                         second_number = Convert.ToDouble(aux);
                     }
 
-                    result_box.Clear();
-                    result = first_number / second_number;
-                    result_box.Text = (" "+result);
+                    if(number==93)
+                    {
+                        result_box.Clear();
+                        result = first_number % second_number;
+                        result_box.Text = (" " + result);
+                    }
+                    if(number==94)
+                    {
+                        result_box.Clear();
+                        result = first_number * first_number * first_number;
+                        result_box.Text = (" " + result);
+                    }
+                    if(number==95)
+                    {
+                        result_box.Clear();
+                        result = first_number * first_number;
+                        result_box.Text = (" " + result);
+                    }
+                    if (number == 96)
+                    {
+                        result_box.Clear();
+                        result = first_number / second_number;
+                        result_box.Text = (" " + result);
+                    }
+                    if (number == 97)
+                    {
+                        result_box.Clear();
+                        result = first_number + second_number;
+                        result_box.Text = (" " + result);
+                    }
+                    if(number==98)
+                    {
+                        result_box.Clear();
+                        result = first_number * second_number;
+                        result_box.Text = (" " + result);
+                    }
+                    if(number==99)
+                    {
+                        result_box.Clear();
+                        result = first_number / - second_number;
+                        result_box.Text = (" " + result);
+                    }
                     
                 }
             }
                 
             
         }
+
+        
     }
 }
