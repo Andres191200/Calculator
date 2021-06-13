@@ -22,11 +22,11 @@ namespace Calculator
 
     public partial class MainWindow : Window
     {
-        int j;
-        float result = 0;
+        int j, delta_y = 0, i;
         List<float> numbers_operators = new List<float>();
-        double first_number;
+        double first_number, result = 0;
         double second_number;
+        float index = 0;
         TextBox result_box = new TextBox();
         public MainWindow()
         {
@@ -233,6 +233,7 @@ namespace Calculator
         {
             numbers_operators.Clear();
             numbers_operators.Add(0);
+            first_number = 0;
             result_box.Text = 0.ToString();
         }
 
@@ -257,87 +258,78 @@ namespace Calculator
         private void RemoveLast_Button(object sender, RoutedEventArgs e)
         {
             numbers_operators.Remove(numbers_operators.Last());
+            result_box.Text.Remove(result_box.Text.Last());
         }
 
         public void CalculateOperations()
         {
-            int delta_x = 0, delta_y = 0;
-            float index = 0;
-            double result = 0;
+            int delta_x = 0;
             string aux = " ";
-
-
-            foreach (float number in numbers_operators)
+            for (i=0;i<numbers_operators.Count();i++)
             {
-                if (number >= 0 && number <= 9)
+                if (numbers_operators[i] >= 0 && numbers_operators[i] <= 9)
                 {
                     delta_x++;
                 }
-                if (number >= 93 && number <= 99) //96=DIVIDE OPERATOR 98=MULTIPLY OPERATOR
+                if (numbers_operators[i] >= 93 && numbers_operators[i] <= 99) //96=DIVIDE OPERATOR 98=MULTIPLY OPERATOR
                 {                            //97=ADD OPERATOR    99=SUBSTRACT OPERATOR
                     delta_y++;
-                    index = delta_x; //index of "%"
+                    index = delta_x; //index of the operator             NOTE: delta_y = counts only operator, delta_x = counts everything
                     delta_x++;
-                    for (int i = 0; i < index; i++)
+                    for (i = 0; i < index; i++)
                     {
                         aux += numbers_operators[i].ToString();     //GET FIRST NUMBER
                         first_number = Convert.ToDouble(aux);
                     }                  
-                    
-                    aux = "";  //CLEANING AUX VARIABLE FOR THE SECOND NUMBER...              
+                    if(delta_y>1)
+                    {
+                        first_number = result;
+                    }
+
+                    aux = "";  //CLEANING AUX VARIABLE FOR THE SECOND NUMBER...
+                               
                     for (j = Convert.ToInt32(index+1); j < numbers_operators.Count(); j++)   //GET SECOND NUMBER
                     {
                         aux += numbers_operators[j].ToString();
                         second_number = Convert.ToDouble(aux);
                     }
 
-                    if(number==93)
-                    {
-                        result_box.Clear();
+                    if(numbers_operators[i] == 93)
+                    { 
                         result = first_number % second_number;
-                        result_box.Text = (" " + result);
                     }
-                    if(number==94)
+                    if(numbers_operators[i] == 94)
                     {
-                        result_box.Clear();
                         result = first_number * first_number * first_number;
-                        result_box.Text = (" " + result);
                     }
-                    if(number==95)
+                    if(numbers_operators[i] == 95)
                     {
-                        result_box.Clear();
                         result = first_number * first_number;
-                        result_box.Text = (" " + result);
                     }
-                    if (number == 96)
+                    if (numbers_operators[i] == 96)
                     {
-                        result_box.Clear();
                         result = first_number / second_number;
-                        result_box.Text = (" " + result);
                     }
-                    if (number == 97)
+                    if (numbers_operators[i] == 97)
                     {
-                        result_box.Clear();
                         result = first_number + second_number;
-                        result_box.Text = (" " + result);
                     }
-                    if(number==98)
+                    if(numbers_operators[i] == 98)
                     {
-                        result_box.Clear();
                         result = first_number * second_number;
-                        result_box.Text = (" " + result);
                     }
-                    if(number==99)
+                    if(numbers_operators[i] == 99)
                     {
-                        result_box.Clear();
-                        result = first_number / - second_number;
-                        result_box.Text = (" " + result);
+                        result = first_number - second_number;
                     }
                     
                 }
             }
-                
-            
+
+            result_box.Text = result.ToString();
+
+            numbers_operators.Clear();
+            numbers_operators.Add((float)result);
         }
 
         
