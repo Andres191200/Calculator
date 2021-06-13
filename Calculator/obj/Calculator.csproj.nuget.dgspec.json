@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repository\\Calculator\\Calculator.csproj": {}
+    "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repo\\copia\\Calculator\\Calculator\\Calculator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repository\\Calculator\\Calculator.csproj": {
+    "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repo\\copia\\Calculator\\Calculator\\Calculator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repository\\Calculator\\Calculator.csproj",
+        "projectUniqueName": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repo\\copia\\Calculator\\Calculator\\Calculator.csproj",
         "projectName": "Calculator",
-        "projectPath": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repository\\Calculator\\Calculator.csproj",
+        "projectPath": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repo\\copia\\Calculator\\Calculator\\Calculator.csproj",
         "packagesPath": "C:\\Users\\Mariano\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repository\\Calculator\\obj\\",
+        "outputPath": "C:\\Users\\Mariano\\source\\repos\\Calculator\\Git_Repo\\copia\\Calculator\\Calculator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mariano\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +37,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -57,7 +55,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

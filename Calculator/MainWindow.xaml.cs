@@ -22,7 +22,7 @@ namespace Calculator
 
     public partial class MainWindow : Window
     {
-        int j, delta_y = 0, i;
+        int j, delta_y = 0, i, result_counting = 0;
         List<float> numbers_operators = new List<float>();
         double first_number, result = 0;
         double second_number;
@@ -57,6 +57,16 @@ namespace Calculator
             return false;
         }
 
+        public bool NoAddNumbersAfterGettingResult()
+        {
+            if (result_counting > 0 && delta_y<=1)
+            {
+                result_box.Text += "";
+                return true;
+            }
+            return false;
+        }
+
         private void Button_Click_0(object sender, RoutedEventArgs e)
         {         
             if (!this.FirstNumberIs0())
@@ -64,12 +74,14 @@ namespace Calculator
                 numbers_operators.Add(0);
                 result_box.Text += 0.ToString();
             }
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
-            if (!this.FirstNumberIs0())
+            if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (!this.FirstNumberIs0())
             {
                 numbers_operators.Add(1);
                 result_box.Text += 1.ToString();
@@ -84,7 +96,9 @@ namespace Calculator
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (!this.FirstNumberIs0())
+            if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if(!this.FirstNumberIs0())
             {
                 numbers_operators.Add(2);
                 result_box.Text += 2.ToString();
@@ -99,7 +113,9 @@ namespace Calculator
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            if (!this.FirstNumberIs0())
+            if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (!this.FirstNumberIs0())
             {
                 numbers_operators.Add(3);
                 result_box.Text += 3.ToString();
@@ -114,7 +130,9 @@ namespace Calculator
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            if (!this.FirstNumberIs0())
+            if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (!this.FirstNumberIs0())
             {
                 numbers_operators.Add(4);
                 result_box.Text += 4.ToString();
@@ -128,7 +146,9 @@ namespace Calculator
         }
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            if (!this.FirstNumberIs0())
+            if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (!this.FirstNumberIs0())
             {
                 numbers_operators.Add(5);
                 result_box.Text += 5.ToString();
@@ -142,7 +162,9 @@ namespace Calculator
         }
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
-            if (!this.FirstNumberIs0())
+            if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (!this.FirstNumberIs0())
             {
                 numbers_operators.Add(6);
                 result_box.Text += 6.ToString();
@@ -157,7 +179,9 @@ namespace Calculator
 
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {
-            if (!this.FirstNumberIs0())
+            if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (!this.FirstNumberIs0())
             {
                 numbers_operators.Add(7);
                 result_box.Text += 7.ToString();
@@ -171,7 +195,9 @@ namespace Calculator
         }
         private void Button_Click_8(object sender, RoutedEventArgs e)
         {
-            if (!this.FirstNumberIs0())
+            if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (!this.FirstNumberIs0())
             {
                 numbers_operators.Add(8);
                 result_box.Text += 8.ToString();
@@ -185,7 +211,9 @@ namespace Calculator
         }
         private void Button_Click_9(object sender, RoutedEventArgs e)
         {
-            if (!this.FirstNumberIs0())
+            if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (!this.FirstNumberIs0())
             {
                 numbers_operators.Add(9);
                 result_box.Text += 9.ToString();
@@ -202,24 +230,28 @@ namespace Calculator
         //OPERATOR FUNCTIONS
         private void Divide_Button_Click(object sender, RoutedEventArgs e)
         {
+            delta_y++;
             result_box.Text += "%";
             numbers_operators.Add(96);
         }
 
         private void Adding_Button_Click(object sender, RoutedEventArgs e)
         {
+            delta_y++;
             result_box.Text += "+";
             numbers_operators.Add(97);
         }
 
         private void Multiply_Button_Click(object sender, RoutedEventArgs e)
         {
+            delta_y++;
             result_box.Text += "x";
             numbers_operators.Add(98);
         }
 
         private void Substract_Button_Click(object sender, RoutedEventArgs e)
         {
+            delta_y++;
             result_box.Text += "-";
             numbers_operators.Add(99);
         }
@@ -231,6 +263,7 @@ namespace Calculator
 
         private void Del_Button_Click(object sender, RoutedEventArgs e)
         {
+            result_counting = 0;
             numbers_operators.Clear();
             numbers_operators.Add(0);
             first_number = 0;
@@ -273,18 +306,17 @@ namespace Calculator
                 }
                 if (numbers_operators[i] >= 93 && numbers_operators[i] <= 99) //96=DIVIDE OPERATOR 98=MULTIPLY OPERATOR
                 {                            //97=ADD OPERATOR    99=SUBSTRACT OPERATOR
-                    delta_y++;
                     index = delta_x; //index of the operator             NOTE: delta_y = counts only operator, delta_x = counts everything
                     delta_x++;
                     for (i = 0; i < index; i++)
                     {
                         aux += numbers_operators[i].ToString();     //GET FIRST NUMBER
                         first_number = Convert.ToDouble(aux);
+                        if (delta_y > 1)
+                        {
+                            first_number = result;
+                        }
                     }                  
-                    if(delta_y>1)
-                    {
-                        first_number = result;
-                    }
 
                     aux = "";  //CLEANING AUX VARIABLE FOR THE SECOND NUMBER...
                                
@@ -327,11 +359,10 @@ namespace Calculator
             }
 
             result_box.Text = result.ToString();
+            result_counting++;
 
             numbers_operators.Clear();
             numbers_operators.Add((float)result);
-        }
-
-        
+        }    
     }
 }
