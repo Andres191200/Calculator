@@ -22,11 +22,13 @@ namespace Calculator
 
     public partial class MainWindow : Window
     {
-        int j, delta_y = 0, i, result_counting = 0;
+        int j, delta_y = 0, i, result_counting = 0, delta_x = 0, exponential_operator = 0;
         List<float> numbers_operators = new List<float>();
         double first_number, result = 0;
         double second_number;
         float index = 0;
+        string aux = " ";
+
         TextBox result_box = new TextBox();
         public MainWindow()
         {
@@ -67,6 +69,15 @@ namespace Calculator
             return false;
         }
 
+        public bool ExponentialOperations()
+        {
+            if (exponential_operator == 1)
+            {
+                result_box.Text += "";
+                return true;
+            }
+            else return false;
+        }
         private void Button_Click_0(object sender, RoutedEventArgs e)
         {         
             if (!this.FirstNumberIs0())
@@ -79,6 +90,8 @@ namespace Calculator
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (this.ExponentialOperations())
+            { }
             if (this.NoAddNumbersAfterGettingResult())
             { }
             else if (!this.FirstNumberIs0())
@@ -96,6 +109,8 @@ namespace Calculator
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            if (this.ExponentialOperations())
+            { }
             if (this.NoAddNumbersAfterGettingResult())
             { }
             else if(!this.FirstNumberIs0())
@@ -113,6 +128,8 @@ namespace Calculator
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            if (this.ExponentialOperations())
+            { }
             if (this.NoAddNumbersAfterGettingResult())
             { }
             else if (!this.FirstNumberIs0())
@@ -146,6 +163,8 @@ namespace Calculator
         }
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
+            if (this.ExponentialOperations())
+            { }
             if (this.NoAddNumbersAfterGettingResult())
             { }
             else if (!this.FirstNumberIs0())
@@ -162,6 +181,8 @@ namespace Calculator
         }
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
+            if (this.ExponentialOperations())
+            { }
             if (this.NoAddNumbersAfterGettingResult())
             { }
             else if (!this.FirstNumberIs0())
@@ -179,6 +200,8 @@ namespace Calculator
 
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {
+            if (this.ExponentialOperations())
+            { }
             if (this.NoAddNumbersAfterGettingResult())
             { }
             else if (!this.FirstNumberIs0())
@@ -195,6 +218,8 @@ namespace Calculator
         }
         private void Button_Click_8(object sender, RoutedEventArgs e)
         {
+            if (this.ExponentialOperations())
+            { }
             if (this.NoAddNumbersAfterGettingResult())
             { }
             else if (!this.FirstNumberIs0())
@@ -211,6 +236,8 @@ namespace Calculator
         }
         private void Button_Click_9(object sender, RoutedEventArgs e)
         {
+            if(this.ExponentialOperations())
+            { }
             if (this.NoAddNumbersAfterGettingResult())
             { }
             else if (!this.FirstNumberIs0())
@@ -264,20 +291,25 @@ namespace Calculator
         private void Del_Button_Click(object sender, RoutedEventArgs e)
         {
             result_counting = 0;
+            aux = "";
+            index = 0;
+            delta_x = 0;
             numbers_operators.Clear();
             numbers_operators.Add(0);
-            first_number = 0;
+            delta_y = 0;
             result_box.Text = 0.ToString();
         }
 
         private void Square_Number_Button(object sender, RoutedEventArgs e)
         {
+            delta_y++;
             result_box.Text += "²";
             numbers_operators.Add(95);
         }
 
         private void Cube_Number_Button(object sender, RoutedEventArgs e)
         {
+            delta_y++;
             result_box.Text += "³";
             numbers_operators.Add(94);
         }
@@ -291,13 +323,11 @@ namespace Calculator
         private void RemoveLast_Button(object sender, RoutedEventArgs e)
         {
             numbers_operators.Remove(numbers_operators.Last());
-            result_box.Text.Remove(result_box.Text.Last());
+            result_box.Text = result_box.Text.Remove(result_box.Text.Length-1);
         }
 
         public void CalculateOperations()
         {
-            int delta_x = 0;
-            string aux = " ";
             for (i=0;i<numbers_operators.Count();i++)
             {
                 if (numbers_operators[i] >= 0 && numbers_operators[i] <= 9)
@@ -357,6 +387,9 @@ namespace Calculator
                     
                 }
             }
+
+            MessageBox.Show("first " + first_number);
+            MessageBox.Show("second " + second_number);
 
             result_box.Text = result.ToString();
             result_counting++;
