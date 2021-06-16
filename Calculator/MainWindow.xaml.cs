@@ -22,6 +22,7 @@ namespace Calculator
 
     public partial class MainWindow : Window
     {
+        bool resulted = false;
         int j, delta_y = 0, i, result_counting = 0, delta_x = 0, exponential_operator = 0;
         List<float> numbers_operators = new List<float>();
         double first_number, result = 0;
@@ -33,8 +34,8 @@ namespace Calculator
         public MainWindow()
         {
             InitializeComponent();
-            
-            
+
+
             //TEXTBOX PROPERTIES
             result_box.FontSize = 50;
             result_box.Background = Brushes.SlateGray;
@@ -52,7 +53,7 @@ namespace Calculator
 
         public bool FirstNumberIs0()
         {
-            if(numbers_operators.First()==0)
+            if (numbers_operators.First() == 0)
             {
                 return true;
             }
@@ -61,7 +62,7 @@ namespace Calculator
 
         public bool NoAddNumbersAfterGettingResult()
         {
-            if (result_counting > 0 && delta_y<=1)
+            if (resulted == true)
             {
                 result_box.Text += "";
                 return true;
@@ -79,7 +80,7 @@ namespace Calculator
             else return false;
         }
         private void Button_Click_0(object sender, RoutedEventArgs e)
-        {         
+        {
             if (!this.FirstNumberIs0())
             {
                 numbers_operators.Add(0);
@@ -113,7 +114,7 @@ namespace Calculator
             { }
             if (this.NoAddNumbersAfterGettingResult())
             { }
-            else if(!this.FirstNumberIs0())
+            else if (!this.FirstNumberIs0())
             {
                 numbers_operators.Add(2);
                 result_box.Text += 2.ToString();
@@ -236,7 +237,7 @@ namespace Calculator
         }
         private void Button_Click_9(object sender, RoutedEventArgs e)
         {
-            if(this.ExponentialOperations())
+            if (this.ExponentialOperations())
             { }
             if (this.NoAddNumbersAfterGettingResult())
             { }
@@ -257,6 +258,7 @@ namespace Calculator
         //OPERATOR FUNCTIONS
         private void Divide_Button_Click(object sender, RoutedEventArgs e)
         {
+            resulted = false;
             delta_y++;
             result_box.Text += "%";
             numbers_operators.Add(96);
@@ -264,6 +266,7 @@ namespace Calculator
 
         private void Adding_Button_Click(object sender, RoutedEventArgs e)
         {
+            resulted = false;
             delta_y++;
             result_box.Text += "+";
             numbers_operators.Add(97);
@@ -271,6 +274,7 @@ namespace Calculator
 
         private void Multiply_Button_Click(object sender, RoutedEventArgs e)
         {
+            resulted = false;
             delta_y++;
             result_box.Text += "x";
             numbers_operators.Add(98);
@@ -278,6 +282,7 @@ namespace Calculator
 
         private void Substract_Button_Click(object sender, RoutedEventArgs e)
         {
+            resulted = false;
             delta_y++;
             result_box.Text += "-";
             numbers_operators.Add(99);
@@ -290,6 +295,7 @@ namespace Calculator
 
         private void Del_Button_Click(object sender, RoutedEventArgs e)
         {
+            resulted = false;
             result_counting = 0;
             aux = "";
             index = 0;
@@ -302,6 +308,8 @@ namespace Calculator
 
         private void Square_Number_Button(object sender, RoutedEventArgs e)
         {
+            resulted = true;
+            exponential_operator++;
             delta_y++;
             result_box.Text += "²";
             numbers_operators.Add(95);
@@ -309,6 +317,8 @@ namespace Calculator
 
         private void Cube_Number_Button(object sender, RoutedEventArgs e)
         {
+            resulted = true;
+            exponential_operator++;
             delta_y++;
             result_box.Text += "³";
             numbers_operators.Add(94);
@@ -316,55 +326,69 @@ namespace Calculator
 
         private void Mod_Number_Button(object sender, RoutedEventArgs e)
         {
+            resulted = false;
             result_box.Text = "MOD";
             numbers_operators.Add(93);
         }
 
         private void RemoveLast_Button(object sender, RoutedEventArgs e)
         {
-            numbers_operators.Remove(numbers_operators.Last());
-            result_box.Text = result_box.Text.Remove(result_box.Text.Length-1);
+            if (result_counting >= 1)
+            { }
+            else
+            {
+                numbers_operators.Remove(numbers_operators.Last());
+                result_box.Text.Remove(result_box.Text.Length - 1);
+                if (result_box.Text == "")
+                {
+                    result_box.Text = "0";
+                    numbers_operators[0] = 0;
+                }
+            }
         }
 
         public void CalculateOperations()
         {
-            for (i=0;i<numbers_operators.Count();i++)
+            resulted = true;
+            for (i = 0; i < numbers_operators.Count(); i++)
             {
                 if (numbers_operators[i] >= 0 && numbers_operators[i] <= 9)
                 {
                     delta_x++;
                 }
                 if (numbers_operators[i] >= 93 && numbers_operators[i] <= 99) //96=DIVIDE OPERATOR 98=MULTIPLY OPERATOR
-                {                            //97=ADD OPERATOR    99=SUBSTRACT OPERATOR
+                {                                                             //97=ADD OPERATOR    99=SUBSTRACT OPERATOR
                     index = delta_x; //index of the operator             NOTE: delta_y = counts only operator, delta_x = counts everything
                     delta_x++;
                     for (i = 0; i < index; i++)
                     {
-                        aux += numbers_operators[i].ToString();     //GET FIRST NUMBER
-                        first_number = Convert.ToDouble(aux);
-                        if (delta_y > 1)
+                        if (result_counting >= 1)
                         {
                             first_number = result;
                         }
-                    }                  
+                        aux += numbers_operators[i].ToString();     //GET FIRST NUMBER
+                        first_number = Convert.ToDouble(aux);
+
+                    }
+
 
                     aux = "";  //CLEANING AUX VARIABLE FOR THE SECOND NUMBER...
-                               
-                    for (j = Convert.ToInt32(index+1); j < numbers_operators.Count(); j++)   //GET SECOND NUMBER
+
+                    for (j = Convert.ToInt32(index + 1); j < numbers_operators.Count(); j++)   //GET SECOND NUMBER
                     {
                         aux += numbers_operators[j].ToString();
                         second_number = Convert.ToDouble(aux);
                     }
 
-                    if(numbers_operators[i] == 93)
-                    { 
+                    if (numbers_operators[i] == 93)
+                    {
                         result = first_number % second_number;
                     }
-                    if(numbers_operators[i] == 94)
+                    if (numbers_operators[i] == 94)
                     {
                         result = first_number * first_number * first_number;
                     }
-                    if(numbers_operators[i] == 95)
+                    if (numbers_operators[i] == 95)
                     {
                         result = first_number * first_number;
                     }
@@ -376,26 +400,25 @@ namespace Calculator
                     {
                         result = first_number + second_number;
                     }
-                    if(numbers_operators[i] == 98)
+                    if (numbers_operators[i] == 98)
                     {
                         result = first_number * second_number;
                     }
-                    if(numbers_operators[i] == 99)
+                    if (numbers_operators[i] == 99)
                     {
                         result = first_number - second_number;
                     }
-                    
+
                 }
             }
 
-            MessageBox.Show("first " + first_number);
-            MessageBox.Show("second " + second_number);
-
             result_box.Text = result.ToString();
             result_counting++;
+            delta_x = 1;
+            aux = "";
 
             numbers_operators.Clear();
             numbers_operators.Add((float)result);
-        }    
+        }
     }
 }
