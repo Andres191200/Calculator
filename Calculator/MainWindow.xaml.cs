@@ -258,34 +258,54 @@ namespace Calculator
         //OPERATOR FUNCTIONS
         private void Divide_Button_Click(object sender, RoutedEventArgs e)
         {
-            resulted = false;
-            delta_y++;
-            result_box.Text += "%";
-            numbers_operators.Add(96);
+            if (this.ExponentialOperations())
+            { }
+            else
+            {
+                resulted = false;
+                delta_y++;
+                result_box.Text += "%";
+                numbers_operators.Add(96);
+            }
         }
 
         private void Adding_Button_Click(object sender, RoutedEventArgs e)
         {
-            resulted = false;
-            delta_y++;
-            result_box.Text += "+";
-            numbers_operators.Add(97);
+            if (this.ExponentialOperations())
+            { }
+            else
+            {
+                resulted = false;
+                delta_y++;
+                result_box.Text += "+";
+                numbers_operators.Add(97);
+            }
         }
 
         private void Multiply_Button_Click(object sender, RoutedEventArgs e)
         {
-            resulted = false;
-            delta_y++;
-            result_box.Text += "x";
-            numbers_operators.Add(98);
+            if (this.ExponentialOperations())
+            { }
+            else
+            {
+                resulted = false;
+                delta_y++;
+                result_box.Text += "x";
+                numbers_operators.Add(98);
+            }
         }
 
         private void Substract_Button_Click(object sender, RoutedEventArgs e)
         {
-            resulted = false;
-            delta_y++;
-            result_box.Text += "-";
-            numbers_operators.Add(99);
+            if (this.ExponentialOperations())
+            { }
+            else
+            {
+                resulted = false;
+                delta_y++;
+                result_box.Text += "-";
+                numbers_operators.Add(99);
+            }
         }
 
         public void GetResult_Button_Click(object sender, RoutedEventArgs e)
@@ -295,8 +315,10 @@ namespace Calculator
 
         private void Del_Button_Click(object sender, RoutedEventArgs e)
         {
+            //RESETING EVERYTHING INCLUDING LIST
             resulted = false;
             result_counting = 0;
+            exponential_operator = 0;
             aux = "";
             index = 0;
             delta_x = 0;
@@ -308,11 +330,16 @@ namespace Calculator
 
         private void Square_Number_Button(object sender, RoutedEventArgs e)
         {
-            resulted = true;
-            exponential_operator++;
-            delta_y++;
-            result_box.Text += "²";
-            numbers_operators.Add(95);
+            if (this.ExponentialOperations())
+            { }
+            else
+            {
+                resulted = true;
+                exponential_operator++;
+                delta_y++;
+                result_box.Text += "²";
+                numbers_operators.Add(95);
+            }
         }
 
         private void Cube_Number_Button(object sender, RoutedEventArgs e)
@@ -326,8 +353,9 @@ namespace Calculator
 
         private void Mod_Number_Button(object sender, RoutedEventArgs e)
         {
+            exponential_operator++; //USING EXPONENTIAL COUNTER EVEN TOUGH IT ISN'T AN EXPONENTIAL OPERATOR, JUST IN CASE...
             resulted = false;
-            result_box.Text = "MOD";
+            result_box.Text += "MOD";
             numbers_operators.Add(93);
         }
 
@@ -362,15 +390,13 @@ namespace Calculator
                     delta_x++;
                     for (i = 0; i < index; i++)
                     {
-                        if (result_counting >= 1)
-                        {
-                            first_number = result;
-                        }
                         aux += numbers_operators[i].ToString();     //GET FIRST NUMBER
                         first_number = Convert.ToDouble(aux);
-
                     }
-
+                    if (result_counting >= 1)
+                    {
+                        first_number = result;
+                    }
 
                     aux = "";  //CLEANING AUX VARIABLE FOR THE SECOND NUMBER...
 
@@ -414,8 +440,11 @@ namespace Calculator
 
             result_box.Text = result.ToString();
             result_counting++;
+
+            //CLEANING VARIABLES FOR NEXT OPERATIONS
             delta_x = 1;
             aux = "";
+            exponential_operator = 0;
 
             numbers_operators.Clear();
             numbers_operators.Add((float)result);
