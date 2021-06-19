@@ -21,6 +21,7 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
         <!-- .......................... NUMBER BUTTONS ........................... -->
@@ -42,7 +43,7 @@
         <Button Grid.Row="1" FontSize="50" Background="LightBlue" Click="Button_Click_0">0</Button>
 
         <!--  .................... OPERATOR BUTTONS ....................... -->
-        <Button Grid.Row="2" Grid.Column="4" FontSize="50" Background="LightBlue" Click="Divide_Button_Click">%</Button>
+        <Button Grid.Row="2" Grid.Column="3" FontSize="50" Background="LightBlue" Click="Divide_Button_Click">%</Button>
 
         <Button Grid.Row="1" Grid.Column="1"  Background="LightBlue" Click="Adding_Button_Click">
             <TextBlock VerticalAlignment="Center" FontSize="60">+</TextBlock>
@@ -71,6 +72,6 @@
         
         <Button Grid.Row="5" Grid.Column="2" FontSize="30" Background="SlateGray" Foreground="white" Click="Mod_Number_Button">MOD</Button>
 
-
+        <Button Grid.Row="1" Grid.Column="5" FontSize="50" Background="SlateGray" Foreground="White" Click="Exponential_Button_Click">Xⁿ</Button>
     </Grid>
 </Window>
