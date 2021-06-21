@@ -51,6 +51,15 @@ namespace Calculator
             calculator_grid.Children.Add(result_box);
         }
 
+        public bool ValidateExponentialBtn()
+        {
+            if(exponential_btn)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool ExponentialButton(string num)
         {
             if (exponential_btn)
@@ -298,7 +307,7 @@ namespace Calculator
         //OPERATOR FUNCTIONS
         private void Divide_Button_Click(object sender, RoutedEventArgs e)
         {
-            if(exponential_btn)
+            if(ValidateExponentialBtn())
             { }
             else if (this.OperatorSetted())
             {
@@ -322,7 +331,7 @@ namespace Calculator
 
         private void Adding_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (exponential_btn)
+            if (ValidateExponentialBtn())
             { }
             else if (this.OperatorSetted())
             {
@@ -346,7 +355,7 @@ namespace Calculator
 
         private void Multiply_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (exponential_btn)
+            if (ValidateExponentialBtn())
             { }
             else if (this.OperatorSetted())
             {
@@ -370,7 +379,7 @@ namespace Calculator
 
         private void Substract_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (exponential_btn)
+            if (ValidateExponentialBtn())
             { }
             else if (this.OperatorSetted())
             {
@@ -412,15 +421,17 @@ namespace Calculator
             delta_x = 0;
             delta_y = 0;
             result_box.Text = 0.ToString();
+            first_number = 0;
+            second_number=0;
 
             numbers_operators.Clear();
             numbers_operators.Add(0);
 
         }
 
-        private void Square_Number_Button(object sender, RoutedEventArgs e)
+        private void Square_Number_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (exponential_btn)
+            if (ValidateExponentialBtn())
             { }
             else
             {
@@ -431,9 +442,9 @@ namespace Calculator
             }
         }
 
-        private void Cube_Number_Button(object sender, RoutedEventArgs e)
+        private void Cube_Number_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (exponential_btn)
+            if (ValidateExponentialBtn())
             { }
             else
             {
@@ -445,9 +456,9 @@ namespace Calculator
             }
         }
 
-        private void Mod_Number_Button(object sender, RoutedEventArgs e)
+        private void Mod_Number_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (exponential_btn)
+            if (ValidateExponentialBtn())
             { }
             else if (this.OperatorSetted())
             {
@@ -466,9 +477,9 @@ namespace Calculator
                 numbers_operators.Add(93);
             }
         }
-        private void RemoveLast_Button(object sender, RoutedEventArgs e)
+        private void RemoveLast_Button_Click(object sender, RoutedEventArgs e)
         {
-            if(exponential_btn)   //YOU CAN'T REMOVE "ELEVATED TO" FUNCTION, YOU HAVE TO PRESS "DEL" BUTTON
+            if(ValidateExponentialBtn())   //YOU CAN'T REMOVE "ELEVATED TO" FUNCTION, YOU HAVE TO PRESS "DEL" BUTTON
             { }
             else if (numbers_operators.Count > 1)
             {
@@ -497,6 +508,11 @@ namespace Calculator
 
                 numbers_operators.Add(92);
             }
+        }
+
+        public void Square_Root_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
         public void CalculateOperations()
         {
