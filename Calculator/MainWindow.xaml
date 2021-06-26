@@ -41,22 +41,22 @@
 
 
 
-        <Button Grid.Row="1" FontSize="50" Background="LightBlue" Click="Button_Click_0">0</Button>
+        <Button Grid.Row="5" Grid.Column="1" FontSize="50" Background="LightBlue" Click="Button_Click_0">0</Button>
 
         <!--  .................... OPERATOR BUTTONS ....................... -->
-        <Button Grid.Row="2" Grid.Column="3" FontSize="50" Background="LightBlue" Click="Divide_Button_Click">%</Button>
+        <Button Grid.Row="2" Grid.Column="3" FontSize="50" Background="SlateGray" Foreground="White" Click="Divide_Button_Click">%</Button>
 
-        <Button Grid.Row="1" Grid.Column="1"  Background="LightBlue" Click="Adding_Button_Click">
+        <Button Grid.Row="1" Grid.Column="1"  Background="SlateGray" Foreground="White" Click="Adding_Button_Click">
             <TextBlock VerticalAlignment="Center" FontSize="60">+</TextBlock>
         </Button>
 
-        <Button Grid.Row="1" Grid.Column="2" FontSize="50" Background="LightBlue" Click="Substract_Button_Click">
+        <Button Grid.Row="1" Grid.Column="2" FontSize="50" Background="SlateGray" Foreground="White" Click="Substract_Button_Click">
             <TextBlock VerticalAlignment="Center" Width="25" Height="76">-</TextBlock>
         </Button>
 
-        <Button Grid.Row="1" Grid.Column="3" FontSize="50" Background="LightBlue" Click="Multiply_Button_Click">x</Button>
+        <Button Grid.Row="1" Grid.Column="3" FontSize="50" Background="SlateGray" Foreground="White" Click="Multiply_Button_Click">x</Button>
 
-        <Button Grid.Row="5" Grid.Column="3" FontSize="50" Background="SlateGray" Foreground="white" Click="GetResult_Button_Click" Name="GetResultBtn">=</Button>
+        <Button Grid.Row="5" Grid.Column="4" FontSize="50" Background="DarkSlateGray" Foreground="white" Click="GetResult_Button_Click" Name="GetResultBtn">=</Button>
 
         <Button Grid.Row="4" Grid.Column="3" FontSize="30" Background="SlateGray" Foreground="white" Click="RemoveLast_Button_Click">
             <StackPanel>
@@ -69,9 +69,9 @@
 
         <Button Grid.Row="5" FontSize="50" Background="SlateGray" Foreground="White" Click="Square_Number_Button_Click">x²</Button>
 
-        <Button Grid.Row="5" Grid.Column="1" FontSize="50" Background="SlateGray" Foreground="white" Click="Cube_Number_Button_Click">x³</Button>
+        <Button Grid.Row="5" Grid.Column="2" FontSize="50" Background="SlateGray" Foreground="white" Click="Cube_Number_Button_Click">x³</Button>
 
-        <Button Grid.Row="5" Grid.Column="2" FontSize="30" Background="SlateGray" Foreground="white" Click="Mod_Number_Button_Click">MOD</Button>
+        <Button Grid.Row="1"  FontSize="30" Background="SlateGray" Foreground="white" Click="Mod_Number_Button_Click">MOD</Button>
 
         <Button Grid.Row="1" Grid.Column="5" FontSize="50" Background="SlateGray" Foreground="White" Click="Exponential_Button_Click">Xⁿ</Button>
 
@@ -81,10 +81,14 @@
             FontSize="50"
             Background="SlateGray"
             Foreground="White"
-            Click="Square_Root_Button_Click" RenderTransformOrigin="0.6,0.527"
-            >
-            <Image Source="C:\Users\Mariano\source\repos\Calculator\Repository\Calculator\square_root.png" Height="74" Width="60" />
+            Content="√¯"
+            Click="Square_Root_Button_Click" RenderTransformOrigin="0.6,0.527">
         </Button>
 
+        <Button Grid.Column="4" Grid.Row="3" FontSize="30" Foreground="White" Background="SlateGray" Click="Log_Button_Click">Log(x)</Button>
+
+        <Button Grid.Column="4" Grid.Row="4" FontSize="30" Foreground="white" Background="SlateGray" Click="Sin_Button_Click">Sin (x)</Button>
+
+        <Button Grid.Column="3" Grid.Row="5" FontSize="30" Foreground="white" Background="SlateGray" Click="Cos_Button_Click">Cos (x)</Button>
     </Grid>
 </Window>

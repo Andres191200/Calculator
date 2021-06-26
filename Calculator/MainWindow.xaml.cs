@@ -15,14 +15,11 @@ using System.Windows.Shapes;
 
 namespace Calculator
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    /// 
+    //A SIMPLE CALCULATOR WHICH ALLOWS TO DO SIMPLE OPERATIONS :D
 
     public partial class MainWindow : Window
     {
-        bool resulted = false, operators = false, exponential_btn = false;
+        bool resulted = false, operators = false, exponential_btn = false, sqrt = false;
         int j, delta_y = 0, i, result_counting = 0, delta_x = 0, exponential_operator = 0;
         List<float> numbers_operators = new List<float>();
         double first_number, result = 0;
@@ -51,6 +48,7 @@ namespace Calculator
             calculator_grid.Children.Add(result_box);
         }
 
+        //VALIDATING FUNCTIONS
         public bool ValidateExponentialBtn()
         {
             if(exponential_btn)
@@ -108,6 +106,9 @@ namespace Calculator
             }
             else return false;
         }
+
+
+        //ADDING NUMBERS WHEN BUTTONS GETS PRESSED
         private void Button_Click_0(object sender, RoutedEventArgs e)
         {
             if (this.ExponentialButton("0"))
@@ -315,7 +316,7 @@ namespace Calculator
                 result_box.Text = result_box.Text += "%";
 
                 numbers_operators.Remove(numbers_operators.Last());
-                numbers_operators.Add(97);
+                numbers_operators.Add(999999999988);
             }
             else if (this.ExponentialOperations())
             { }
@@ -325,7 +326,7 @@ namespace Calculator
                 resulted = false;
                 delta_y++;
                 result_box.Text += "%";
-                numbers_operators.Add(96);
+                numbers_operators.Add(999999999988);
             }
         }
 
@@ -339,7 +340,7 @@ namespace Calculator
                 result_box.Text = result_box.Text += "+";
 
                 numbers_operators.Remove(numbers_operators.Last());
-                numbers_operators.Add(97);
+                numbers_operators.Add(999999999989);
             }
             else if (this.ExponentialOperations())
             { }
@@ -349,7 +350,7 @@ namespace Calculator
                 resulted = false;
                 delta_y++;
                 result_box.Text += "+";
-                numbers_operators.Add(97);
+                numbers_operators.Add(999999999989);
             }
         }
 
@@ -363,7 +364,7 @@ namespace Calculator
                 result_box.Text = result_box.Text += "x";
 
                 numbers_operators.Remove(numbers_operators.Last());
-                numbers_operators.Add(98);
+                numbers_operators.Add(999999999990);
             }
             else if (this.ExponentialOperations())
             { }
@@ -373,7 +374,7 @@ namespace Calculator
                 resulted = false;
                 delta_y++;
                 result_box.Text += "x";
-                numbers_operators.Add(98);
+                numbers_operators.Add(999999999990);
             }
         }
 
@@ -387,7 +388,7 @@ namespace Calculator
                 result_box.Text = result_box.Text += "-";
 
                 numbers_operators.Remove(numbers_operators.Last());
-                numbers_operators.Add(99);
+                numbers_operators.Add(999999999991);
             }
             else if (this.ExponentialOperations())
             { }
@@ -397,11 +398,9 @@ namespace Calculator
                 resulted = false;
                 delta_y++;
                 result_box.Text += "-";
-                numbers_operators.Add(99);
+                numbers_operators.Add(999999999991);
             }
         }
-
-
 
         public void GetResult_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -423,6 +422,7 @@ namespace Calculator
             result_box.Text = 0.ToString();
             first_number = 0;
             second_number=0;
+            sqrt = false;
 
             numbers_operators.Clear();
             numbers_operators.Add(0);
@@ -438,7 +438,7 @@ namespace Calculator
                 exponential_operator++;
                 delta_y++;
                 result_box.Text += "²";
-                numbers_operators.Add(95);
+                numbers_operators.Add(999999999992);
             }
         }
 
@@ -452,7 +452,7 @@ namespace Calculator
                 exponential_operator++;
                 delta_y++;
                 result_box.Text += "³";
-                numbers_operators.Add(94);
+                numbers_operators.Add(999999999993);
             }
         }
 
@@ -466,7 +466,7 @@ namespace Calculator
                 result_box.Text = result_box.Text += "MOD";
 
                 numbers_operators.Remove(numbers_operators.Last());
-                numbers_operators.Add(93);
+                numbers_operators.Add(999999999994);
             }
             else
             {
@@ -474,7 +474,7 @@ namespace Calculator
                 exponential_operator++; //USING EXPONENTIAL COUNTER EVEN TOUGH IT ISN'T AN EXPONENTIAL OPERATOR, JUST IN CASE...
                 resulted = false;
                 result_box.Text += "MOD";
-                numbers_operators.Add(93);
+                numbers_operators.Add(999999999994);
             }
         }
         private void RemoveLast_Button_Click(object sender, RoutedEventArgs e)
@@ -483,6 +483,16 @@ namespace Calculator
             { }
             else if (numbers_operators.Count > 1)
             {
+                if (numbers_operators.Last() == 999999999996)
+                {
+                    sqrt = false;
+                }
+                else if (numbers_operators.Last()== 999999999992 || numbers_operators.Last()== 999999999993)
+                {
+                    exponential_operator--;
+                    delta_y--;
+                    resulted = false;
+                }
                 numbers_operators.Remove(numbers_operators.Last());
                 result_box.Text = result_box.Text.Remove(result_box.Text.Length - 1);
             }
@@ -506,16 +516,76 @@ namespace Calculator
                 result_box.FontSize = 35;
                 result_box.Text += " elevated to ";
 
-                numbers_operators.Add(92);
+                numbers_operators.Add(999999999995);
             }
         }
 
         public void Square_Root_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            if (this.OperatorSetted())
+            { }
+            else if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (delta_x == 0 && FirstNumberIs0())
+            {
+                numbers_operators.Remove(numbers_operators.First());
+                numbers_operators.Add(999999999996);
+                operators = true;
+                result_box.Text = "√";
+                sqrt = true;
+            }
+            else
+            { }
         }
+
+        private void Log_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.OperatorSetted())
+            { }
+            else if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (delta_x == 0)
+            {
+                numbers_operators.Remove(numbers_operators.First());
+                numbers_operators.Add(9999999999997);
+                operators = true;
+                result_box.Text = "log";
+            }
+        }
+
+        private void Sin_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.OperatorSetted())
+            { }
+            else if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (delta_x==0)
+            {
+                numbers_operators.Remove(numbers_operators.First());
+                numbers_operators.Add(999999999998);
+                result_box.Text = "Sin ";
+            }
+        }
+
+        private void Cos_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.OperatorSetted())
+            { }
+            else if (this.NoAddNumbersAfterGettingResult())
+            { }
+            else if (delta_x == 0)
+            {
+                numbers_operators.Remove(numbers_operators.First());
+                numbers_operators.Add(999999999999);
+                result_box.Text = "Sin ";
+            }
+        }
+
+
+        //GETTING FIRST AND SECOND NUMBERS
         public void CalculateOperations()
         {
+            sqrt = false;
             operators = false;
             resulted = true;
             for (i = 0; i < numbers_operators.Count(); i++)
@@ -524,9 +594,9 @@ namespace Calculator
                 {
                     delta_x++;
                 }
-                if (numbers_operators[i] >= 92 && numbers_operators[i] <= 99) //96=DIVIDE OPERATOR 98=MULTIPLY OPERATOR
-                {                                                             //97=ADD OPERATOR    99=SUBSTRACT OPERATOR              
-                    index = delta_x; //index of the operator             NOTE: delta_y = counts only operator, delta_x = counts everything
+                if (numbers_operators[i] >= 999999999988 && numbers_operators[i] <= 999999999999) 
+                {                                                                        
+                    index = delta_x; //index of the operator. NOTE: delta_y = counts only operator, delta_x = counts everything
                     delta_x++;
                     for (i = 0; i < index; i++)
                     {
@@ -544,47 +614,63 @@ namespace Calculator
                     {
                         aux += numbers_operators[j].ToString();
                         second_number = Convert.ToDouble(aux);
-                    }
-                    if(numbers_operators[(int)index] == 92)
-                    {
-                        second_number = Convert.ToDouble(second_number_aux);
-                        result = Math.Pow((double)first_number, (double)second_number);
-                    }
-                    if (numbers_operators[(int)index] == 93)
-                    {
-                        result = first_number % second_number;
-                    }
-                    if (numbers_operators[(int)index] == 94)
-                    {
-                        result = first_number * first_number * first_number;
-                    }
-                    if (numbers_operators[(int)index] == 95)
-                    {
-                        result = first_number * first_number;
-                    }
-                    if (numbers_operators[(int)index] == 96)
+                    }                   
+
+                    //OPERATOR CODES GOES 999999999988 THROUGH 999999999999
+                    if (numbers_operators[(int)index] == 999999999988) 
                     {
                         result = first_number / second_number;
                     }
-                    if (numbers_operators[(int)index] == 97)
+                    if (numbers_operators[(int)index] == 999999999989)
                     {
                         result = first_number + second_number;
                     }
-                    if (numbers_operators[(int)index] == 98)
+                    if (numbers_operators[(int)index] == 999999999990)
                     {
                         result = first_number * second_number;
                     }
-                    if (numbers_operators[(int)index] == 99)
+                    if (numbers_operators[(int)index] == 999999999991)
                     {
                         result = first_number - second_number;
                     }
-
+                    if (numbers_operators[(int)index] == 999999999992)
+                    {
+                        result = first_number * first_number;
+                    }
+                    if (numbers_operators[(int)index] == 999999999993)
+                    {
+                        result = first_number * first_number * first_number ;
+                    }
+                    if (numbers_operators[(int)index] == 999999999994)
+                    {
+                        result = first_number % second_number;
+                    }
+                    if (numbers_operators[(int)index] == 999999999995)
+                    {
+                        result = Math.Pow(first_number, second_number);
+                    }
+                    if (numbers_operators[(int)index] == 999999999996)
+                    {
+                        result = Math.Sqrt(second_number); 
+                    }
+                    if (numbers_operators[(int)index] == 999999999997)
+                    {
+                        result = Math.Log(second_number);
+                    }
+                    if(numbers_operators[(int)index] == 999999999998)
+                    {
+                        result = Math.Sin(second_number);
+                    }
+                    if(numbers_operators[(int)index]== 999999999999)
+                    {
+                        result = Math.Cos(second_number);
+                    }
                 }
             }
             result_box.Text = result.ToString();
             result_counting++;
 
-            //CLEANING VARIABLES FOR NEXT OPERATIONS
+            //CLEANING VARIABLES FOR NEXT OPERATIONS (RESETING VARIABLES...)
             delta_x = 0;
             aux = "";
             exponential_operator = 0;
